@@ -207,10 +207,10 @@ marimo/_lsp/
 __marimo__/
 
 # Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+dist
+node_modules
+build
+tmp
 
 # Logs
 logs
