@@ -256,15 +256,53 @@ import { useCallback } from "react";
 //     </div>
 //   );
 // }
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+import { useEffect } from 'react';
+import axios from "axios";
+
+const AxiosExample = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts"
+        );
+        setData(response.data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-      {isAuthenticated ? (
-        <h1>User Profile</h1>
+      <h1>Axios Example</h1>
+      {data ? (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.title}</li>
+          ))}
+        </ul>
       ) : (
-        <button onClick={() => setIsAuthenticated(true)}>Log In</button>
+        <p>Loading...</p>
       )}
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <div>
+      <AxiosExample />
     </div>
   );
 }
