@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js";
 // import Product from "./models/product.model.js";
 
 import router from "./routes/product.route.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); //allows us to parse json
+app.use(cors());
 
 app.use("/api/products", router);
 
